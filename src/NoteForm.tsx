@@ -2,10 +2,10 @@ import React, { FormEvent, useRef, useState } from "react";
 import { Form, Col, Row, Stack, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
-import { NoteData, Tag } from "./App";
+import { RawNoteData, Tag } from "./App";
 
 type NoteFormProps = {
-	onSubmit: (data: NoteData) => void;
+	onSubmit: (data: RawNoteData) => void;
 };
 
 const NoteForm = ({ onSubmit }: NoteFormProps) => {
@@ -18,7 +18,7 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
 		onSubmit({
 			title: titleRef.current!.value,
 			markdown: markdownRef.current!.value,
-			tags: [],
+			tagIds: [],
 		});
 	};
 
@@ -40,6 +40,16 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
 								value={selectedTags.map((tag) => {
 									return { label: tag.label, value: tag.id };
 								})}
+								onChange={(tags) => {
+									setSelectedTags(
+										tags.map((tag) => {
+											return {
+												label: tag.label,
+												id: tag.value,
+											};
+										})
+									);
+								}}
 							/>
 						</Form.Group>
 					</Col>
