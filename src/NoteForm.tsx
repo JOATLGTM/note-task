@@ -2,10 +2,10 @@ import React, { FormEvent, useRef, useState } from "react";
 import { Form, Col, Row, Stack, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
-import { RawNoteData, Tag } from "./App";
+import { NoteData, Tag } from "./App";
 
 type NoteFormProps = {
-	onSubmit: (data: RawNoteData) => void;
+	onSubmit: (data: NoteData) => void;
 };
 
 const NoteForm = ({ onSubmit }: NoteFormProps) => {
@@ -18,7 +18,7 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
 		onSubmit({
 			title: titleRef.current!.value,
 			markdown: markdownRef.current!.value,
-			tagIds: [],
+			tags: [],
 		});
 	};
 
